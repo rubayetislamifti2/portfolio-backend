@@ -6,6 +6,8 @@ use App\Http\Controllers\{AuthController,PersonalInfoController};
 
 Route::post('login',[AuthController::class,'login']);
 
+Route::get('personal-info',[PersonalInfoController::class,'index']);
+
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::post('personal-info',[PersonalInfoController::class,'store']);
 });

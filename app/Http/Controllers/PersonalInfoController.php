@@ -12,7 +12,7 @@ class PersonalInfoController extends Controller
         try {
             $info = PersonalInfo::find(1);
 
-
+            return $this->success($info,'Data fetch Successfully',200);
         }catch (\Exception $exception){
             return $this->error($exception->getMessage(),'Something went wrong',500);
         }
