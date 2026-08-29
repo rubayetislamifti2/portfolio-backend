@@ -2,7 +2,7 @@ stages:
   - build
 
 variables:
-  IMAGE_NAME: $DOCKERHUB_USER/domira-group
+  IMAGE_NAME: $DOCKERHUB_USER/portfolio-backend
   IMAGE_TAG: $IMAGE_NAME:$CI_COMMIT_SHORT_SHA
   IMAGE_LATEST: $IMAGE_NAME:latest
 
