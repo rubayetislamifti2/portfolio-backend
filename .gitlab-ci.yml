@@ -1,20 +1,21 @@
 stages:
-    - build
+  - build
 
 variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-    IMAGE_LATEST: $CI_REGISTRY_IMAGE:latest
+  IMAGE_NAME: $DOCKERHUB_USER/domira-group
+  IMAGE_TAG: $IMAGE_NAME:$CI_COMMIT_SHORT_SHA
+  IMAGE_LATEST: $IMAGE_NAME:latest
 
 build:
-    stage: build
-    image: docker:24.0
-    services:
-        - docker:24.0-dind
-    before_script:
-        - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    script:
-        - docker build -t $IMAGE_TAG -t $IMAGE_LATEST .
-        - docker push $IMAGE_TAG
-        - docker push $IMAGE_LATEST
-    only:
-        - main
+  stage: build
+  image: docker:24.0
+  services:
+    - docker:24.0-dind
+  before_script:
+    - docker login -u $DOCKERHUB_USER -p $DOCKERHUB_TOKEN
+  script:
+    - docker build -t $IMAGE_TAG -t $IMAGE_LATEST .
+    - docker push $IMAGE_TAG
+    - docker push $IMAGE_LATEST
+  only:
+    - main
